@@ -1,20 +1,37 @@
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { storage } from './src/storage';
+import { MainNavigator } from './src/navigation/MainNavigator';
+import { PinScreen } from './src/screens/PinScreen';
 
 export default function App() {
+  const [pin, setPin] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [unlocked, setUnlocked] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      const d = await storage.loadData();
+      setPin(d.settings.pin ?? null);
+      setLoading(false);
+    };
+    load();
+  }, []);
+
+  if (loading) {
+    return null;
+  }
+
+  if (pin && !unlocked) {
+    return (
+      <PinScreen pin={pin} mode="verify" onUnlock={() => setUnlocked(true)} />
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <>
       <StatusBar style="auto" />
-    </View>
+      <MainNavigator />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
