@@ -25,6 +25,20 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": []
+    "plugins": [
+      "expo-updates"
+    ],
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/387d9782-6ac3-4e0d-990a-23525ee1185b"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "387d9782-6ac3-4e0d-990a-23525ee1185b"
+      }
+    },
+    "owner": "ohno1"
   }
 }

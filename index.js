@@ -1,8 +1,17 @@
 import { registerRootComponent } from 'expo';
+import * as Updates from 'expo-updates';
 
-import App from './App';
+import App from './App.tsx';
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
+// Check for updates on startup
+if (__DEV__ === false) {
+  Updates.checkForUpdateAsync().then((update) => {
+    if (update.isAvailable) {
+      Updates.fetchUpdateAsync().then(() => {
+        Updates.reloadAsync();
+      });
+    }
+  });
+}
+
 registerRootComponent(App);
