@@ -28,7 +28,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.1.1",
     "typescript": "^5.5.4"
   }
 }
